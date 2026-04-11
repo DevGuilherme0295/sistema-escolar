@@ -2,6 +2,8 @@ const express = require('express');
 
 const app = express();
 
+app.use(express.json());
+
 app.get('/', (req, res) => {
     res.send("Requisição recebida!")
 });
@@ -27,6 +29,30 @@ app.get('/home', (req, res) => {
 app.get('/me', (req, res) => {
     const {nome, cidade} = req.query;
     res.send(`Meu nome é ${nome}, Moro em ${cidade}`);
+});
+
+app.get('/produto{/*categoria}{/*produto}', (req,res) => {
+    const {categoria, produto} = req.params;
+
+    if(categoria && produto){
+        return res.send(`Página do produto ${produto}`);
+    } 
+    
+    if (categoria && !produto) {
+        return res.send(`Todos os produtos da categoria: ${categoria}`);
+    } 
+    
+    return res.send(`Todos os produtos`);
+     
+});
+
+app.post('/login', (req,res) => {
+    const {email, password} = req.body;
+
+    if(email == 'email@email.com' && password == 'senha123'){
+        return res.send('Usuário logado com sucesso!');
+    }
+    return res.send('Login incorreto!');
 });
 
 app.listen(1234, () => {
