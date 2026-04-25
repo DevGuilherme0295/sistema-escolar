@@ -2,15 +2,18 @@
 /**
  Desafio para casa:
 
- Criar um rota PUT /users/:id que atualiza os dados de um usuario que 
- já existe.
+ Criar um rota DELETE /users/:i
  
  Regras:
- 1. Usuario precisa ter id numerico
- 2. No POST o novo usuario deve ser criado com id
- 3. No PUT deve ser atualizado apenas os campos envidos no body
+    1. A rota deve apagar  apneas o usuário  que tem o mesmo ID recebido;
+    2. A rota deve recebr 404 quando receber um ID que não existe;
  
- Exemplo de fakeUsers com id: [{id: 1, name: "Joselito", email: 'joselito@mail.com'}]
+ Um pouco mais avançado:
+    No lugar de apagar o usuário da "tabela", adicionar um campo chamado 
+    is_deleted, e na lista de usuários retornar apenas o usuário que não tem
+    esse campo definido; 
+ 
+    Soft delete
  */
 
 const fakeUsers = [
