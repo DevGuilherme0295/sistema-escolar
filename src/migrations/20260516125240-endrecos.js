@@ -11,25 +11,47 @@ module.exports = {
      * Example:
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
-    await queryInterface.createTable('escolas', {
+    await queryInterface.createTable('enderecos', {
       id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true
       },
-      name: {
-        type: Sequelize.STRING(50),
+      aluno_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        unique: true,
+        references: {
+          model: 'aluno',
+          key: 'id'
+        },
+      },
+      city: {
+        type: Sequelize.STRING(20),
         allowNull: false,
       },
-      cnpj: {
+      neighborhood: {
         type: Sequelize.STRING(20),
+        allowNull: false,
+      },
+      uf: {
+        type: Sequelize.STRING(2),
+        allowNull: false
+      },
+      street: {
+        type: Sequelize.STRING(100),
+        allowNull: false
+      },
+      completment: {
+        type: Sequelize.STRING(255),
         allowNull: false
       },
       
       ...CreatedUpdated
 
     })
+
   },
 
   async down (queryInterface, Sequelize) {
@@ -39,6 +61,6 @@ module.exports = {
      * Example:
      * await queryInterface.dropTable('users');
      */
-    await queryInterface.dropTable('escolas');
+    await queryInterface.dropTable('enderecos');
   }
 };

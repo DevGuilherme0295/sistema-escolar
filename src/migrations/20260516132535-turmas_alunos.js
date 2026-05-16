@@ -2,6 +2,7 @@
 
 const CreatedUpdated = require("../models/CreatedAndUpdated");
 
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
@@ -11,24 +12,25 @@ module.exports = {
      * Example:
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
-    await queryInterface.createTable('escolas', {
-      id: {
+    await queryInterface.createTable('turmas_alunos', {
+      turma_id: {
         type: Sequelize.INTEGER,
-        autoIncrement: true,
         allowNull: false,
-        primaryKey: true
+        references: {
+          model: 'turmas',
+          key: 'id'
+        }
       },
-      name: {
-        type: Sequelize.STRING(50),
+      aluno_id: {
+        type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: 'alunos',
+          key: 'id'
+        }
       },
-      cnpj: {
-        type: Sequelize.STRING(20),
-        allowNull: false
-      },
-      
-      ...CreatedUpdated
 
+      ...CreatedUpdated
     })
   },
 
@@ -39,6 +41,7 @@ module.exports = {
      * Example:
      * await queryInterface.dropTable('users');
      */
-    await queryInterface.dropTable('escolas');
+
+    await queryInterface.dropTable('turmas_alunos');
   }
 };

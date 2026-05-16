@@ -4,14 +4,14 @@ const CreatedUpdated = require("../models/CreatedAndUpdated");
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     /**
      * Add altering commands here.
      *
      * Example:
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
-    await queryInterface.createTable('escolas', {
+    await queryInterface.createTable('alunos', {
       id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -19,26 +19,40 @@ module.exports = {
         primaryKey: true
       },
       name: {
-        type: Sequelize.STRING(50),
+        type: Sequelize.STRING(20),
         allowNull: false,
       },
-      cnpj: {
+      surname: {
         type: Sequelize.STRING(20),
+        allowNull: false,
+      },
+      email: {
+        type: Sequelize.STRING(50),
         allowNull: false
       },
-      
+      document: {
+        type: Sequelize.STRING(50),
+        allowNull: false
+      },
+      document_type: {
+        type: Sequelize.STRING(10),
+        allowNull: false
+      },
+
       ...CreatedUpdated
 
+
     })
+
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     /**
      * Add reverting commands here.
      *
      * Example:
      * await queryInterface.dropTable('users');
      */
-    await queryInterface.dropTable('escolas');
+    await queryInterface.dropTable('alunos');
   }
 };
